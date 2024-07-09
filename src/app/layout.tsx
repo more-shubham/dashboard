@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Karla } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const karla_font = Karla({
+  subsets: ["latin"],
+  variable: "--font-karla",
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn(
+        "min-h-screen bg-background antialiased dark font-karla",
+        karla_font.variable
+      )}>{children}</body>
     </html>
   );
 }
