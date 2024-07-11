@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Link from "next/link";
+import { registerApi } from "@/api/user";
 
 const formSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
@@ -21,13 +22,13 @@ export default function Home() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "",
-            password: ""
+            email: "admin@missionrtc.com",
+            password: "te@mw0rK!ng"
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        await registerApi(values.email, values.password)
     }
 
     return (
